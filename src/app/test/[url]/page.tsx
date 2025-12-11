@@ -1,4 +1,3 @@
-// src/app/test/[url]/page.tsx
 import LatencyGraph from "../../components/LatencyGraph";
 import GlobalMap from "../../components/GlobalMap";
 import WaterfallChart from "../../components/waterfallChart";
