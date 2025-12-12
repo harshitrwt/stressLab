@@ -7,8 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 function computeScore(latencies: number[]) {
   if (!latencies.length) return 0;
   const avg = latencies.reduce((a, b) => a + b, 0) / latencies.length;
-  const score = Math.max(0, Math.min(100, Math.round(100 - avg / 10)));
-  return score;
+  return Math.max(0, Math.min(100, Math.round(100 - avg / 10)));
 }
 
 function scoreColor(score: number) {
@@ -29,12 +28,14 @@ export default function ScoreCard({ target }: { target: string }) {
 
   useEffect(() => {
     if (!target) return;
+
     const conn = connectEventSource(target, (name, data) => {
       if (name === "latency") {
         const l = typeof data.latency === "number" ? data.latency : null;
         if (l != null) setLatencies((s) => [...s.slice(-49), l]);
       }
     });
+
     return () => conn.close();
   }, [target]);
 
@@ -49,7 +50,6 @@ export default function ScoreCard({ target }: { target: string }) {
     return () => clearTimeout(timeout);
   }, [score]);
 
-  
   const message =
     score >= 80
       ? "Your website is performing excellently! Users should experience fast loading times."
@@ -58,8 +58,7 @@ export default function ScoreCard({ target }: { target: string }) {
       : "Your website performance is poor. Users may experience slow loading times.";
 
   return (
-    <div className="p-6 bg-zinc-900 rounded-md mx-auto shadow-lg max">
-     
+    <div className="p-6 bg-zinc-900 rounded-md shadow-lg h-[350px] overflow-hidden">
       <div className="flex items-center justify-between mb-2">
         <div>
           <h3 className="text-lg font-semibold">Performance Score</h3>
@@ -86,7 +85,6 @@ export default function ScoreCard({ target }: { target: string }) {
         </div>
       </div>
 
-      
       <div className="mt-3">
         <span className={`px-2 py-1 rounded ${scoreColor(score)} bg-zinc-800 font-semibold`}>
           {scoreLabel(score)}
@@ -94,7 +92,6 @@ export default function ScoreCard({ target }: { target: string }) {
         <p className="text-zinc-400 text-sm mt-1">{message}</p>
       </div>
 
-      
       <div className="mt-4 h-16 bg-zinc-800 rounded overflow-hidden relative">
         {latencies.length ? (
           <svg className="w-full h-full">
@@ -104,11 +101,12 @@ export default function ScoreCard({ target }: { target: string }) {
               strokeWidth="2"
               points={latencies
                 .map((lat, i) => {
-                  const svgWidth = 100; // percent-based
-                  const svgHeight = 16; // div height
-                  const x = (i / Math.max(latencies.length - 1, 1)) * svgWidth;
+                  const svgWidth = 100;
+                  const svgHeight = 16;
+                  const x =
+                    (i / Math.max(latencies.length - 1, 1)) * svgWidth;
                   const maxLat = 1000;
-                  const y = svgHeight - Math.min(lat, maxLat) / maxLat * svgHeight;
+                  const y = svgHeight - (Math.min(lat, maxLat) / maxLat) * svgHeight;
                   return `${x},${y}`;
                 })
                 .join(" ")}
@@ -120,8 +118,6 @@ export default function ScoreCard({ target }: { target: string }) {
           </div>
         )}
       </div>
-
-      
     </div>
   );
 }

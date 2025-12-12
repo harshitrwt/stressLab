@@ -75,16 +75,16 @@ export default function LatencyGraph({ target }: { target: string }) {
   }, []);
 
   return (
-    <div className="p-4 bg-zinc-900 rounded h-40">
+    <div className="p-4 bg-zinc-900 rounded h-full">
       <div className="flex justify-between items-center mb-2">
         <h4 className="font-semibold">Latency (ms)</h4>
-        <div className="text-sm text-zinc-400">
+        <div className="text-sm text-zinc-400 h-full">
           {points.length ? `${Math.round(points.at(-1) ?? 0)} ms` : "--"}
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${width} ${height}`} width="100%" height={height}>
-        <rect x="0" y="0" width={width} height={height} rx="8" fill="#111214" />
+      <svg viewBox={`0 0 ${width} ${height}`} width="100%" height="100%">
+        <rect x="0" y="0" width={width} height="100%" rx="8" fill="#111214" />
 
         
         {verticalLines}
