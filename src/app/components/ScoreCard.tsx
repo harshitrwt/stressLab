@@ -92,17 +92,17 @@ export default function ScoreCard({ target }: { target: string }) {
         <p className="text-zinc-400 text-sm mt-1">{message}</p>
       </div>
 
-      <div className="mt-4 h-16 bg-zinc-800 rounded overflow-hidden relative">
+      <div className="mt-4 h-32 bg-zinc-800 rounded overflow-hidden relative">
         {latencies.length ? (
           <svg className="w-full h-full">
             <polyline
               fill="none"
               stroke="#10b981"
-              strokeWidth="2"
+              strokeWidth="1"
               points={latencies
                 .map((lat, i) => {
                   const svgWidth = 100;
-                  const svgHeight = 16;
+                  const svgHeight = 76;
                   const x =
                     (i / Math.max(latencies.length - 1, 1)) * svgWidth;
                   const maxLat = 1000;

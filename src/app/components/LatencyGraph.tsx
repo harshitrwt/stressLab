@@ -94,7 +94,7 @@ export default function LatencyGraph({ target }: { target: string }) {
         {path && <path d={path} stroke="#60A5FA" strokeWidth={2} fill="none" strokeLinecap="round" />}
 
   
-        <text x={width - 4} y={padding + 10} fill="#777" fontSize="10" textAnchor="end">
+        <text x={width - 4} y={padding + 10} fill="#777" height="100%" fontSize="10" textAnchor="end">
           {Math.round(max)} ms
         </text>
         <text x={width - 4} y={height - padding - 4} fill="#777" fontSize="10" textAnchor="end">

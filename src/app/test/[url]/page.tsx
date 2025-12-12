@@ -4,6 +4,7 @@ import WaterfallChart from "../../components/waterfallChart";
 import ScoreCard from "../../components/ScoreCard";
 import LiveUpdates from "../../components/LiveUpdates";
 import SitePreview from "../../components/sitePreview";
+import FrameworkDetector from "@/app/components/FrameworkDetector";
 
 export default async function TestDashboard(props: { params: Promise<{ url: string }> }) {
   const { url } = await props.params;
@@ -27,6 +28,8 @@ export default async function TestDashboard(props: { params: Promise<{ url: stri
       <GlobalMap target={target} />
 
       <LiveUpdates target={target} />
+      <FrameworkDetector targetUrl={target}/>
+      
     </main>
   );
 }
